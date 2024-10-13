@@ -34,12 +34,20 @@ class Stack<T> {
         top = NewNode;
     }
     
+    /// <summary>
+    /// Returns boolean value for if the stack is empty or not 
+    /// </summary>
+    /// <returns>Boolean - is list empty or not</returns>
     public bool IsEmpty() 
     {
         //If the top is null, there are no items in the stack
         return this.top == null;
     } 
 
+    /// <summary>
+    /// Returns the object stored at the top of the stack without removing it from the stack.
+    /// </summary>
+    /// <returns></returns>
     public T? Peek() 
     {
         //If the list is empty return default. Otherwise return the top item.
@@ -51,6 +59,10 @@ class Stack<T> {
         }
     }
 
+    /// <summary>
+    /// Returns the item at the top of the stack and removes it from the stack.
+    /// </summary>
+    /// <returns>Object at the top of the stack</returns>
     public T? Pop() 
     {
         if(top is null)
@@ -66,7 +78,10 @@ class Stack<T> {
         }
     }
 
-
+    /// <summary>
+    /// Returns the amount of items currently present in the stack as an integer value. Starts counting frm 1 (if only one item is in the stack it will return 1 rather than 0 indexing).
+    /// </summary>
+    /// <returns>Integer value for size of stack</returns>
     public int Size()
     {
         //if the list is empty, return 0.
@@ -86,7 +101,9 @@ class Stack<T> {
         return count;
     }
 
-
+    /// <summary>
+    /// Node used for storing data in the stack.
+    /// </summary>
     private class Node {
         public T data;
 
