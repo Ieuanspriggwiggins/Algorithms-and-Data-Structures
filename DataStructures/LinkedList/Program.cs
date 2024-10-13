@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Diagnostics.Contracts;
+using System.Text;
 
 /// <summary>
 /// The main program class containing the main method
@@ -14,6 +15,10 @@ class Program {
         LinkedList<string> list = new();
         list.InsertAtHead("First insert");
         list.InsertAtHead("Second Insert");
+        list.InsertAtTail("Third Input");
+        list.InsertAtTail("Fourth Input");
+        list.InsertAtIndex(2, "Insertion at index");
+
         Console.WriteLine(list.ToString());
     }
 }
@@ -49,7 +54,68 @@ class LinkedList<T> {
 
     //TODO: Implement adding to the end of the list
 
-    //TODO: Implement finding certain data in the list
+    public void InsertAtTail(T data) 
+    {
+        Node newNode = new(data);
+        //Check if list is empty
+        if(head is null) 
+        {
+            head = newNode;
+            tail = newNode;
+            return;
+        }
+
+        if(tail is not null)
+        {
+            tail.NextNode = newNode;
+            tail = newNode;
+        }
+    }
+
+    //TODO: Implement inserting at index
+    /// <summary>
+    /// Inserts at an index in the list.
+    /// </summary>
+    /// <param name="index"></param>
+    /// <param name="data"></param>
+    /// <returns>Boolean - true if insertion success, false otherwise</returns>
+    public bool InsertAtIndex(int index, T data)
+    {
+        Node NewNode = new(data);
+
+        //If the node is empty, return false
+        if(head is null) 
+        {
+            return false;
+        }
+
+        //If the index is 0, insert at the head as it is effectively the same operation.
+        if(index == 0)
+        {
+            InsertAtHead(data);
+            return true;
+        }
+
+        Node? CurrentNode = head;
+        bool isFound = false;
+        int i = 0;
+
+        while(CurrentNode is not null)
+        {
+
+            if(i == (index - 1))
+            {
+                NewNode.NextNode = CurrentNode.NextNode;
+                CurrentNode.NextNode = NewNode;
+                isFound = true;
+            }
+
+            i++;
+            CurrentNode = CurrentNode.NextNode;
+        }
+
+        return isFound; 
+    } 
 
     //TODO: Implement getting data stored at certain index.
 
@@ -68,7 +134,7 @@ class LinkedList<T> {
         do{
             if(currentNode.data is not null)
             {
-                //Use the data being stored ToString method to enforce consistency across different types
+                //Use the data being stored ToString method to enforce consistency across different typeszx
                 stringBuilder.Append($"{index}. {currentNode.data.ToString()}\n");
             }
 
