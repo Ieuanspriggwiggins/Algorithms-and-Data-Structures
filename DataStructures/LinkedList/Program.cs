@@ -17,7 +17,9 @@ class Program {
         list.InsertAtHead("Second Insert");
         list.InsertAtTail("Third Input");
         list.InsertAtTail("Fourth Input");
-        list.InsertAtIndex(2, "Insertion at index");
+        Console.WriteLine(list.InsertAtIndex(4, "Insertion at index"));
+
+        Console.WriteLine(list.GetItemAtIndex(2));
 
         Console.WriteLine(list.ToString());
     }
@@ -118,6 +120,34 @@ class LinkedList<T> {
     } 
 
     //TODO: Implement getting data stored at certain index.
+    public T? GetItemAtIndex(int index) {
+        //If the list is empty
+        if(head is null)
+        {
+            return default;
+        }
+
+        //If the index is the beginning of the list, simply return the head
+        if(index == 0)
+        {
+            return head.data;
+        }
+
+        Node? CurrentNode = head;
+        int i = 0;
+        do{
+            if(i == index) 
+            {
+                return CurrentNode.data;
+            }
+            CurrentNode = CurrentNode.NextNode;
+            i++;
+        }while(CurrentNode != null);
+
+        return default; //Return default if nothing is found
+    }
+
+    //TODO: Implement a count method to get the size of the list
 
     //TODO: Implement ToString method
     public override string ToString() {
